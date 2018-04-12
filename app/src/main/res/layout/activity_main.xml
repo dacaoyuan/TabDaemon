@@ -39,4 +39,14 @@
 
 
 
+    <Button
+        android:id="@+id/button5"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="底部导航栏采用RadioButton"
+        android:textAllCaps="false"/>
+
+
+
+
 </LinearLayout>

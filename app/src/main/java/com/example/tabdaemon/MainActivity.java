@@ -20,7 +20,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    @OnClick({R.id.button1, R.id.button2, R.id.button3, R.id.button4})
+    @OnClick({R.id.button1, R.id.button2, R.id.button3, R.id.button4,R.id.button5})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.button1:
@@ -35,6 +35,10 @@ public class MainActivity extends AppCompatActivity {
                 break;
             case R.id.button4:
                 startActivity(new Intent(this, Main5Activity.class));
+                break;
+            case R.id.button5:
+
+
                 break;
         }
     }
