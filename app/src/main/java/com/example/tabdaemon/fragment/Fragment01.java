@@ -30,7 +30,7 @@ public class Fragment01 extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View inflate = inflater.inflate(R.layout.fragment01, container, false);
-        WebView webView = inflate.findViewById(R.id.webview);
+        WebView webView = (WebView) inflate.findViewById(R.id.webview);
         webView.setWebViewClient(new WebViewClient());
         webView.loadUrl("https://www.baidu.com/");
         return inflate;
