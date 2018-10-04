@@ -37,7 +37,7 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(new Intent(this, Main5Activity.class));
                 break;
             case R.id.button5:
-
+                startActivity(new Intent(this, Main6Activity.class));
 
                 break;
         }
