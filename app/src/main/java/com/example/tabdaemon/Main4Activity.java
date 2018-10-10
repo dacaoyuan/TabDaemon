@@ -28,6 +28,8 @@ import butterknife.ButterKnife;
  * <p>
  * 很多博客建议这样的做的，（1）：节省性能；（2）：不会再快速来回切换fragment时，出错。（不过我好像还没有遇到过）
  * 如果你的项目没有 每次切换到相应fragment时，都要重新执行fragment的生命周期的要求的话。
+ * <p>
+ * 2018-10-10 书写：现在意识到，这样做是对的。（推荐这样做），搭建主框架时，直接去replace的话，不太好
  */
 public class Main4Activity extends AppCompatActivity implements BottomNavigationBar.OnTabSelectedListener {
     private static final String TAG = "Main4Activity";
