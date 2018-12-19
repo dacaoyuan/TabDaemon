@@ -45,6 +45,8 @@ public class Main4Activity extends AppCompatActivity implements BottomNavigation
         setContentView(R.layout.activity_main4);
         ButterKnife.bind(this);
         initBottomNavigationBar();
+
+        fm = getSupportFragmentManager();
         fragments = getFragments();
         setDefaultFragment(fragments.get(0));
     }
@@ -53,10 +55,16 @@ public class Main4Activity extends AppCompatActivity implements BottomNavigation
      * 设置默认的
      */
     private void setDefaultFragment(Fragment defaultFragment) {
-        fm = getSupportFragmentManager();
         FragmentTransaction transaction = fm.beginTransaction();
-        transaction.add(R.id.fl_content, defaultFragment);
+        //transaction.add(R.id.fl_content, defaultFragment);
         //transaction.addToBackStack(null);//模拟返回栈
+        if (defaultFragment.isAdded()) {
+            Log.i(TAG, "onTabSelected: isAdded");
+            transaction.show(defaultFragment);
+        } else {
+            Log.i(TAG, "onTabSelected: is not Added");
+            transaction.add(R.id.fl_content, defaultFragment, 0 + "");
+        }
         transaction.commitAllowingStateLoss();
     }
 
@@ -106,10 +114,37 @@ public class Main4Activity extends AppCompatActivity implements BottomNavigation
 
     private ArrayList<Fragment> getFragments() {
         ArrayList<Fragment> fragments = new ArrayList<>();
-        fragments.add(Fragment01.getFragment());
-        fragments.add(Fragment02.getFragment());
-        fragments.add(Fragment03.getFragment());
-        fragments.add(Fragment04.getFragment());
+
+        Fragment fragment01 = fm.findFragmentByTag(0 + "");
+        if (fragment01 == null) {
+            fragments.add(Fragment01.getFragment());
+        } else {
+            fragments.add(fragment01);
+        }
+
+        Fragment fragment02 = fm.findFragmentByTag(1 + "");
+        if (fragment02 == null) {
+            fragments.add(Fragment02.getFragment());
+        } else {
+            fragments.add(fragment02);
+        }
+
+        Fragment fragment03 = fm.findFragmentByTag(2 + "");
+        if (fragment03 == null) {
+            fragments.add(Fragment03.getFragment());
+        } else {
+            fragments.add(fragment03);
+        }
+
+        Fragment fragment04 = fm.findFragmentByTag(3 + "");
+        if (fragment04 == null) {
+            fragments.add(Fragment04.getFragment());
+        } else {
+            fragments.add(fragment04);
+        }
+
+
+
         return fragments;
     }
 
@@ -127,7 +162,7 @@ public class Main4Activity extends AppCompatActivity implements BottomNavigation
                     ft.show(fragment);
                 } else {
                     Log.i(TAG, "onTabSelected: is not Added");
-                    ft.add(R.id.fl_content, fragment);
+                    ft.add(R.id.fl_content, fragment, position + "");
                 }
                 ft.commitAllowingStateLoss();
             }

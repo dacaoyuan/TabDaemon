@@ -53,7 +53,8 @@ public class Main2Activity extends AppCompatActivity implements BottomNavigation
         FragmentTransaction transaction = fm.beginTransaction();
         transaction.replace(R.id.fl_content, defaultFragment);
         //transaction.addToBackStack(null);//模拟返回栈
-        transaction.commitAllowingStateLoss();
+        transaction.commit();
+        //transaction.commitAllowingStateLoss();
     }
 
 
@@ -125,8 +126,8 @@ public class Main2Activity extends AppCompatActivity implements BottomNavigation
                 }*/
 
                 ft.replace(R.id.fl_content, fragment);
-
-                ft.commitAllowingStateLoss();
+                ft.commit();
+                //ft.commitAllowingStateLoss();
             }
         }
     }

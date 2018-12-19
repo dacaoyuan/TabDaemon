@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.tabdaemon.R;
+import com.example.tabdaemon.base.BasePresentFragment;
 
 
 /**
@@ -15,7 +16,7 @@ import com.example.tabdaemon.R;
  * <p>
  */
 
-public class Fragment04 extends Fragment {
+public class Fragment04 extends BasePresentFragment {
     private static final String TAG = "Fragment04";
 
 
@@ -24,11 +25,21 @@ public class Fragment04 extends Fragment {
         return fragment;
     }
 
-    @Nullable
+  /*  @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
+
+    }
+*/
+    @Override
+    protected View createView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         return inflater.inflate(R.layout.fragment04, container, false);
+    }
+
+    @Override
+    protected void initData() {
+
     }
 
 
