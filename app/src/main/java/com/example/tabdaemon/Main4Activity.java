@@ -1,6 +1,7 @@
 package com.example.tabdaemon;
 
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -48,7 +49,22 @@ public class Main4Activity extends AppCompatActivity implements BottomNavigation
 
         fm = getSupportFragmentManager();
         fragments = getFragments();
-        setDefaultFragment(fragments.get(0));
+
+        if (savedInstanceState==null) {
+            setDefaultFragment(fragments.get(0));
+            mBottomNavigationBar.setFirstSelectedPosition(0).initialise();
+        }else {
+            for (int i = 0; i < fragments.size(); i++) {
+                if (fragments.get(i).isAdded()) {
+                    if (!fragments.get(i).isHidden()) {
+                        mBottomNavigationBar.setFirstSelectedPosition(i).initialise();
+                    }
+                }
+
+            }
+
+        }
+
     }
 
     /**
@@ -56,15 +72,15 @@ public class Main4Activity extends AppCompatActivity implements BottomNavigation
      */
     private void setDefaultFragment(Fragment defaultFragment) {
         FragmentTransaction transaction = fm.beginTransaction();
-        //transaction.add(R.id.fl_content, defaultFragment);
+        transaction.add(R.id.fl_content, defaultFragment);
         //transaction.addToBackStack(null);//模拟返回栈
-        if (defaultFragment.isAdded()) {
+        /*if (defaultFragment.isAdded()) {
             Log.i(TAG, "onTabSelected: isAdded");
             transaction.show(defaultFragment);
         } else {
             Log.i(TAG, "onTabSelected: is not Added");
             transaction.add(R.id.fl_content, defaultFragment, 0 + "");
-        }
+        }*/
         transaction.commitAllowingStateLoss();
     }
 
@@ -105,10 +121,11 @@ public class Main4Activity extends AppCompatActivity implements BottomNavigation
                 .addItem(new BottomNavigationItem(R.drawable.ic_book_white_24dp, "books").setActiveColorResource(R.color.colorPrimary))
                 .addItem(new BottomNavigationItem(R.drawable.ic_music_note_white_24dp, "music").setActiveColorResource(R.color.colorPrimary))
                 .addItem(new BottomNavigationItem(R.drawable.ic_tv_white_24dp, "TV").setActiveColorResource(R.color.colorPrimary))
-                .setFirstSelectedPosition(0)
+                //.setFirstSelectedPosition(0)
                 .initialise();
 
         mBottomNavigationBar.setTabSelectedListener(this);
+
 
     }
 
@@ -144,8 +161,21 @@ public class Main4Activity extends AppCompatActivity implements BottomNavigation
         }
 
 
-
         return fragments;
+    }
+
+    @Override
+    protected void onSaveInstanceState(@NonNull Bundle outState) {
+        Log.i(TAG, "onSaveInstanceState: 保存");
+
+        super.onSaveInstanceState(outState);
+    }
+
+    @Override
+    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+        Log.i(TAG, "onRestoreInstanceState: 恢复");
+
+        super.onRestoreInstanceState(savedInstanceState);
     }
 
     @Override
